@@ -26,4 +26,11 @@
         date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt
         from board_table where id = #{id}
     </select>
+
+    <!-- 게시글 수정 -->
+    <update id="update" parameterType="board">
+        update board_table
+        set boardTitle = #{boardTitle}, boardContents = #{boardContents}
+        where id = #{id}
+    </update>
 </mapper>
