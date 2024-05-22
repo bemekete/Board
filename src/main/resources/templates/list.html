@@ -8,7 +8,8 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
-        th, td{
+
+        th, td {
             padding: 10px;
         }
     </style>
@@ -25,7 +26,9 @@
     </tr>
     <tr th:each="board: ${boardList}">
         <td th:text="${board.id}"></td>
-        <td th:text="${board.boardTitle}"></td>
+        <td>
+            <a th:text="${board.boardTitle}" th:href="@{|/${board.id}|}"></a>
+        </td>
         <td th:text="${board.boardWriter}"></td>
         <td th:text="${board.createdAt}"></td>
         <td th:text="${board.boardHits}"></td>
