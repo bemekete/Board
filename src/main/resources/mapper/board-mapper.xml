@@ -12,31 +12,36 @@
     <!-- 게시글 전체목록 불러오기 -->
     <select id="findAll" resultType="board">
         select id, boardTitle, boardWriter, boardHits, date_format(createdAt, "%Y-%m-%d") as createdAt
-        from board_table order by id desc
+        from hwang_board.board_table order by id desc
     </select>
 
     <!-- 조회수 업데이트 -->
     <update id="updateHits" parameterType="Long">
-        update board_table set boardHits = boardHits+1 where id = #{id}
+        update hwang_board.board_table set boardHits = boardHits+1 where id = #{id}
     </update>
 
     <!-- 게시글 상세내용 -->
     <select id="findById" parameterType="Long" resultType="board">
         select id, boardTitle, boardWriter, boardPass, boardContents ,boardHits,
         date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt
-        from board_table where id = #{id}
+        from hwang_board.board_table where id = #{id}
+    </select>
+
+    <!-- 파일 가져오기 -->
+    <select id="findFile" parameterType="Long" resultType="boardFile">
+        select * from hwang_board.board_file_table where boardId = #{id }
     </select>
 
     <!-- 게시글 수정 -->
     <update id="update" parameterType="board">
-        update board_table
+        update hwang_board.board_table
         set boardTitle = #{boardTitle}, boardContents = #{boardContents}
         where id = #{id}
     </update>
 
     <!-- 게시글 삭제 -->
     <delete id="delete" parameterType="Long">
-        delete from board_table
+        delete from hwang_board.board_table
         where id = #{id}
     </delete>
 
@@ -45,4 +50,5 @@
         insert into board_file_table(originalFileName, storedFileName, boardId)
         values (#{originalFileName},#{storedFileName},#{boardId})
     </insert>
+
 </mapper>
