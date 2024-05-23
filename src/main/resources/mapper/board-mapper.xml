@@ -5,8 +5,8 @@
 <mapper namespace="Board">
     <!-- 게시글 입력 -->
     <insert id="save" parameterType="board" useGeneratedKeys="true" keyProperty="id">
-        insert into board_table(boardTitle, boardWriter, boardPass, boardContents)
-        values (#{boardTitle},#{boardWriter},#{boardPass},#{boardContents})
+        insert into board_table(boardTitle, boardWriter, boardPass, boardContents, fileAttached)
+        values (#{boardTitle},#{boardWriter},#{boardPass},#{boardContents}, #{fileAttached})
     </insert>
 
     <!-- 게시글 전체목록 불러오기 -->
@@ -23,13 +23,13 @@
     <!-- 게시글 상세내용 -->
     <select id="findById" parameterType="Long" resultType="board">
         select id, boardTitle, boardWriter, boardPass, boardContents ,boardHits,
-        date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt
+        date_format(createdAt, "%Y-%m-%d %H:%i:%s") as createdAt , fileAttached
         from hwang_board.board_table where id = #{id}
     </select>
 
     <!-- 파일 가져오기 -->
     <select id="findFile" parameterType="Long" resultType="boardFile">
-        select * from hwang_board.board_file_table where boardId = #{id }
+        select * from hwang_board.board_file_table where boardId = #{id}
     </select>
 
     <!-- 게시글 수정 -->
