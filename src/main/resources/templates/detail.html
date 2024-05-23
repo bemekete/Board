@@ -8,7 +8,8 @@
             border: 1px solid black;
             border-collapse: collapse;
         }
-        th, td{
+
+        th, td {
             padding: 10px;
         }
     </style>
@@ -46,14 +47,16 @@
 <button onclick="deleteReq()">삭제</button>
 </body>
 <script th:inline="javascript">
-    const listReq = () =>{
+    const listReq = () => {
         location.href = "/list";
     }
-    const updateReq = () =>{
+    const updateReq = () => {
         location.href = `/update/[[${board.id}]]`;
     }
-    const deleteReq = () =>{
-        location.href = "/delete";
+    const deleteReq = () => {
+        if (confirm("정말 삭제 하시겠습니까?")) {
+            location.href = `/delete/[[${board.id}]]`;
+        }
     }
 </script>
 </html>
