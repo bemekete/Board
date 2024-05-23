@@ -55,9 +55,8 @@ public class BoardController {
     public String update(@PathVariable("id") Long id, Model model){
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board",boardDTO);
-        return "/update";
+        return "update";
     }
-
 
     @PostMapping("/update/{id}")
     public String update(BoardDTO boardDTO, Model model){
